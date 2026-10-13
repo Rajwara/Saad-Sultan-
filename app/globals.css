@@ -519,3 +519,6 @@ html{scrollbar-gutter:stable}
 .mail svg{flex:0 0 auto}
 .read{white-space:nowrap;flex:0 0 auto}
 .who{min-width:0}
+/* testimonial avatars: initial on a dark circle until a photo is added */
+.q-who .media{background:var(--ink)}
+.q-who .media::before{font-size:clamp(14px,1.1vw,28px);font-weight:700;color:var(--y);letter-spacing:0;background-image:none}

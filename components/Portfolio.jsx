@@ -261,7 +261,7 @@ export default function Portfolio() {
               <article className="glass q-card" key={i}>
                 <span className="qm"><svg viewBox="0 0 24 24"><path d="M3 21v-7c0-5 2.5-8 7-9l1 2c-2.5 1-3.6 2.8-3.8 5H11v9zm10 0v-7c0-5 2.5-8 7-9l1 2c-2.5 1-3.6 2.8-3.8 5H21v9z" /></svg></span>
                 <h3>{q.title}</h3><blockquote>{q.text}</blockquote>
-                <div className="q-who"><div className="media" data-label=""><Img src={`/images/avatar-${i + 1}.jpg`} /></div><div><b>{q.name}</b><small>{q.role}</small></div></div>
+                <div className="q-who"><div className="media" data-label={q.name[0]}><Img src={`/images/avatar-${i + 1}.jpg`} /></div><div><b>{q.name}</b><small>{q.role}</small></div></div>
               </article>
             ))}
           </div></div>
