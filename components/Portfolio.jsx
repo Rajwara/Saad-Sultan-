@@ -198,7 +198,7 @@ export default function Portfolio() {
           <div className="work-pin"><div className="work-track" id="workTrack">
             {PROJECTS.map((p, i) => (
               <a href={p.href} className="w-card" data-cursor="CLICK" key={i}>
-                <div className="media" data-label={`Project ${pad(i + 1)} image\nimages/project-${pad(i + 1)}.jpg`}><Img src={`/images/project-${pad(i + 1)}.jpg`} alt={p.name} /></div>
+                <div className="media" data-label={`${p.name} image\nimages/portfolio/${p.image}`}><Img src={`/images/portfolio/${p.image}`} alt={p.name} /></div>
                 <div className="w-top"><span className="wp">{pad(i + 1)}</span><span className="wps">{p.tags.map(t => <span className="wp" key={t}>{t}</span>)}</span></div>
                 <div className="w-bot">
                   <div><h3>{p.name}</h3><p>{p.desc}</p></div>
