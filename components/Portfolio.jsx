@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { initMotion } from '@/lib/motion';
-import { WORD, EMAIL, SOCIALS, JOURNEY, PROJECTS, CAPS, STATEMENT, QUOTES, CLIENT_LOGOS, FAQS } from '@/lib/content';
+import { WORD, FULL_NAME, EMAIL, SOCIALS, BLURB, STATS, JOURNEY, PROJECTS, CAPS, STATEMENT, QUOTES, CLIENT_LOGOS, FAQS } from '@/lib/content';
 
 const pad = n => String(n).padStart(2, '0');
 
@@ -24,7 +24,7 @@ function Portrait() {
   return (
     <div className="portrait">
       {!loaded && <div className="ph-person" />}
-      <div className="media"><Img src="/images/portrait.webp" alt="Portrait of Saad" onLoad={() => setLoaded(true)} /></div>
+      <div className="media"><Img src="/images/portrait.webp" alt={`Portrait of ${FULL_NAME}`} onLoad={() => setLoaded(true)} /></div>
     </div>
   );
 }
@@ -46,6 +46,10 @@ const NAV = [
 ];
 
 const Sep = () => <i className="sep hfade" />;
+
+const Stat = ({ value, label, ...rest }) => (
+  <div {...rest}><b>{value}</b><small>{label[0]}<br />{label[1]}</small></div>
+);
 
 export default function Portfolio() {
   useEffect(() => initMotion(), []);
@@ -70,16 +74,16 @@ export default function Portfolio() {
           <div className="s-top">
             <a href="#home" className="pill wordfont" aria-label="Home"><span className="pill-bg" /><span className="sp">{WORD}</span></a>
             <div className="socials fi">
-              <a href={SOCIALS.x} aria-label="X"><svg viewBox="0 0 24 24"><path d="M18.2 2H21l-6.5 7.4L22 22h-6l-4.7-6.1L5.8 22H3l7-8L2 2h6.1l4.2 5.6zm-1 18h1.6L7 3.9H5.3z" /></svg></a>
-              <a href={SOCIALS.linkedin} aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5M3 9h4v12H3zm7 0h3.8v1.7h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.3c0-1.3 0-2.9-1.8-2.9s-2 1.4-2 2.8V21h-4z" /></svg></a>
+              <a href={SOCIALS.github} aria-label="GitHub" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.83 1.19 3.08 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5" /></svg></a>
+              <a href={SOCIALS.linkedin} aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5M3 9h4v12H3zm7 0h3.8v1.7h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.3c0-1.3 0-2.9-1.8-2.9s-2 1.4-2 2.8V21h-4z" /></svg></a>
             </div>
           </div>
-          <p className="s-blurb fi">I help brands and agencies launch sharp, fast websites — built with care and simple to update.</p>
+          <p className="s-blurb fi">{BLURB}</p>
         </div>
         <div className="panel s-stats"><span className="pbg" />
-          <div className="st mv" data-anchor="a-st1"><b>50+</b><small>Projects<br />delivered</small></div>
+          <Stat {...STATS[0]} className="st mv" data-anchor="a-st1" />
           <span className="div fi" />
-          <div className="st mv" data-anchor="a-st2"><b>5+</b><small>Years of<br />experience</small></div>
+          <Stat {...STATS[1]} className="st mv" data-anchor="a-st2" />
         </div>
         <nav className="panel s-nav"><span className="pbg" />
           {NAV.map(([id, label, icon], i) => (
@@ -92,7 +96,7 @@ export default function Portfolio() {
           {[...CLIENT_LOGOS, ...CLIENT_LOGOS].map((l, i) => <span key={i}>{l}</span>)}
         </div></div></div>
         <div className="panel mail fi"><span className="pbg" />
-          <button data-copy={EMAIL}>{EMAIL} <svg viewBox="0 0 24 24"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12zm3 4H8a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2" /></svg></button>
+          <button data-copy={EMAIL} title={EMAIL}><span className="em">{EMAIL}</span><svg viewBox="0 0 24 24"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12zm3 4H8a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2" /></svg></button>
         </div>
         <a href="#cta" className="btn s-btn mv" data-anchor="a-btn" data-btn="1">Book a Call</a>
       </aside>
@@ -116,8 +120,8 @@ export default function Portfolio() {
           </div>
         </nav>
         <div className="chip-l">
-          <div className="gdark hchip wide hfade-bg"><div className="st anc" id="a-st1"><b>50+</b><small>Projects<br />delivered</small></div></div>
-          <div className="gdark hchip hfade-bg"><div className="st anc" id="a-st2"><b>5+</b><small>Years of<br />experience</small></div></div>
+          <div className="gdark hchip wide hfade-bg"><Stat {...STATS[0]} className="st anc" id="a-st1" /></div>
+          <div className="gdark hchip hfade-bg"><Stat {...STATS[1]} className="st anc" id="a-st2" /></div>
         </div>
         <ul className="gdark traits hfade">
           <li><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10H12z" /></svg>Creative</li>
@@ -131,7 +135,7 @@ export default function Portfolio() {
           <div className="hero-cta"><a href="#cta" className="btn anc" id="a-btn">Book a Call</a><a href="#about" className="btn hfade">About Me</a></div>
         </div>
         <p className="foot-l hfade">The web developer for bold brands.<br />That&apos;s Saad.</p>
-        <p className="foot-r hfade">I help brands and agencies launch sharp, fast websites — built with care and simple to update.</p>
+        <p className="foot-r hfade">{BLURB}</p>
       </header>
 
       <main>
@@ -276,7 +280,7 @@ export default function Portfolio() {
           </div>
         </section>
       </main>
-      <div className="endbar"><span>© <span suppressHydrationWarning>{new Date().getFullYear()}</span> Saad. All rights reserved.</span><a href="#home">Back to top ↑</a></div>
+      <div className="endbar"><span>© <span suppressHydrationWarning>{new Date().getFullYear()}</span> {FULL_NAME}. All rights reserved.</span><a href="#home">Back to top ↑</a></div>
 
       <div className="modal" role="dialog" aria-modal="true"><div className="modal-bg" />
         <div className="modal-box"><button className="modal-x" aria-label="Close">×</button><div className="big" /><h3 /><p /></div>

@@ -512,3 +512,10 @@ html{scrollbar-gutter:stable}
   .hero-cta{margin-top:12px}
   .traits{display:none!important}
 }
+
+/* ================= LONGER CONTENT — real email address and dates ================= */
+.mail button{min-width:0;overflow:hidden;gap:.5em;font-size:clamp(10px,.9vw,23px)}
+.mail button .em{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mail svg{flex:0 0 auto}
+.read{white-space:nowrap;flex:0 0 auto}
+.who{min-width:0}
