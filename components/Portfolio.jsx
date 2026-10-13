@@ -54,8 +54,16 @@ const SOCIAL_ICONS = {
 
 const Sep = () => <i className="sep hfade" />;
 
-const Stat = ({ value, label, ...rest }) => (
-  <div {...rest}><b>{value}</b><small>{label[0]}<br />{label[1]}</small></div>
+const STAT_ICONS = {
+  briefcase: 'M9 2h6a2 2 0 0 1 2 2v2h3a2 2 0 0 1 2 2v4.5h-8V11h-4v1.5H2V8a2 2 0 0 1 2-2h3V4a2 2 0 0 1 2-2m0 4h6V4H9zm-7 8h8v1.5h4V14h8v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z',
+  medal: 'M6 2h4l2 4 2-4h4l-3.6 7.2A7 7 0 1 1 9.6 9.2zm6 9a5 5 0 1 0 0 10 5 5 0 0 0 0-10m0 1.6 1.2 2.4 2.6.4-1.9 1.8.5 2.6-2.4-1.3-2.4 1.3.5-2.6-1.9-1.8 2.6-.4z',
+};
+
+const Stat = ({ value, label, icon, ...rest }) => (
+  <div {...rest}>
+    <b>{icon && <svg viewBox="0 0 24 24" aria-hidden="true"><path fillRule="evenodd" d={STAT_ICONS[icon]} /></svg>}{value}</b>
+    <small>{label[0]}<br />{label[1]}</small>
+  </div>
 );
 
 export default function Portfolio() {
