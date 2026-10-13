@@ -1,11 +1,13 @@
 # Testimonial logos
 
-Upload your clients' company logos here. Use these exact file names (lowercase, PNG with a transparent background works best):
+Client logos shown in the circle on each testimonial card. Square images work best.
 
 | File | Client | Company |
 |---|---|---|
-| `shop-slim.png` | Angelo | Shop Slim |
-| `contigo.png` | Zahran Haji | Contigo |
-| `get-boss-now.png` | Sage | Get Boss Now |
-| `modahf.png` | Marcos | ModaHF |
-| `naqstech.png` | Muzzam | Naqstech |
+| `shopslim.jpg` | Angelo | Shop Slim |
+| `contigo.jpg` | Zahran Haji | Contigo |
+| `boss.jpg` | Sage | Get Boss Now |
+| `moda.svg` | Marcos | ModaHF |
+| `naqstech.jpg` | Muzzam | Naqstech |
+
+To change a logo, upload the new file here and update the `logo:` name for that client in `lib/content.js`.

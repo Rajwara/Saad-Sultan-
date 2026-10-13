@@ -525,3 +525,6 @@ html{scrollbar-gutter:stable}
 .q-who .media::before{font-size:clamp(14px,1.1vw,28px);font-weight:700;color:var(--y);letter-spacing:0;background-image:none}
 .socials svg{width:46%;height:46%}
 @media (min-width:768px) and (max-width:1199px){ .hchip,.hchip.wide{min-width:136px} }
+/* testimonial logos: white circle behind the logo; wide/transparent logos get breathing room */
+.q-who .media:has(img){background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
+.q-who .media.logo-pad img{object-fit:contain;padding:18%}
