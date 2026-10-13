@@ -24,7 +24,7 @@ function Portrait() {
   return (
     <div className="portrait">
       {!loaded && <div className="ph-person" />}
-      <div className="media"><Img src="/images/portrait.png" alt="Portrait of Saad" onLoad={() => setLoaded(true)} /></div>
+      <div className="media"><Img src="/images/portrait.webp" alt="Portrait of Saad" onLoad={() => setLoaded(true)} /></div>
     </div>
   );
 }

@@ -47,7 +47,7 @@ img{display:block;max-width:100%}
 .portrait .media img{object-fit:contain;object-position:bottom center}
 .ph-person{position:absolute;inset:0}
 .ph-person::before{content:"";position:absolute;left:50%;top:8%;width:33%;aspect-ratio:.8;transform:translateX(-50%);border-radius:48% 48% 44% 44%;background:linear-gradient(160deg,#cdae98,#97796a)}
-.ph-person::after{content:"YOUR PORTRAIT — images/portrait.png";display:grid;place-items:end center;padding-bottom:14px;font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.3);
+.ph-person::after{content:"YOUR PORTRAIT — images/portrait.webp";display:grid;place-items:end center;padding-bottom:14px;font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.3);
   position:absolute;left:50%;bottom:0;width:100%;height:58%;transform:translateX(-50%);border-radius:46% 46% 0 0/36% 36% 0 0;background:linear-gradient(180deg,#252525,#111)}
 
 /* ===== HERO ===== */
