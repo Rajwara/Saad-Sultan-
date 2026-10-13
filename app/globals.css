@@ -522,3 +522,4 @@ html{scrollbar-gutter:stable}
 /* testimonial avatars: initial on a dark circle until a photo is added */
 .q-who .media{background:var(--ink)}
 .q-who .media::before{font-size:clamp(14px,1.1vw,28px);font-weight:700;color:var(--y);letter-spacing:0;background-image:none}
+.socials svg{width:46%;height:46%}
