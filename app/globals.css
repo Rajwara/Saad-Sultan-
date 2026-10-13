@@ -1,10 +1,10 @@
 :root{
   --bg:#d6cfbe; --ink:#121212; --muted:#4b4740; --y:#fff21a; --dark:#141414;
   --glass:rgba(236,233,222,.55); --glass-b:rgba(255,255,255,.45);
-  --r:14px; --side:250px; --gut:clamp(16px,2.2vw,32px);
+  --r:14px; --side:250px; --gut:clamp(16px,2.2vw,56px);
   --ease:cubic-bezier(.22,1,.36,1);
   --word:min(30vw,50vh);
-  --col:calc(var(--side) + 16px + clamp(24px,2.6vw,44px));
+  --col:calc(var(--side) + 16px + clamp(24px,2.6vw,67px));
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html.lenis,html.lenis body{height:auto}
@@ -55,25 +55,25 @@ img{display:block;max-width:100%}
 .a-word{position:absolute;left:0;right:0;top:2.2vh;display:flex;justify-content:center;color:var(--y);font-size:var(--word)}
 .hero-nav{position:absolute;left:var(--gut);right:var(--gut);top:calc(var(--word)*.8 + 5.5vh);display:flex;justify-content:space-between;align-items:center}
 .hero-nav .row{display:flex;align-items:center;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.01em}
-.hero-nav .sep{width:1px;height:12px;background:var(--ink);margin:0 13px;opacity:.7}
+.hero-nav .sep{width:1px;height:.7em;background:var(--ink);margin:0 .75em;opacity:.7}
 .hero-center{position:absolute;left:50%;bottom:6vh;transform:translateX(-50%);z-index:3;width:max-content;max-width:calc(100% - 2*var(--gut))}
-.hero-title{color:#fff;font-weight:800;font-size:clamp(40px,4.9vw,80px);line-height:1.02;letter-spacing:-.02em}
+.hero-title{color:#fff;font-weight:800;font-size:clamp(40px,4.9vw,125px);line-height:1.02;letter-spacing:-.02em}
 .line{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
 .line>span{display:inline-block}
 .hero-cta{display:flex;gap:8px;justify-content:center;margin-top:24px}
 .chip-l{position:absolute;z-index:3;right:calc(50% + min(15vw,270px));bottom:13vh;display:flex;flex-direction:column;gap:10px;align-items:flex-end}
-.hchip{padding:16px 18px;display:flex;align-items:center;justify-content:center;min-width:110px}
-.hchip.wide{min-width:180px}
+.hchip{padding:clamp(12px,1.1vw,28px) clamp(14px,1.25vw,32px);display:flex;align-items:center;justify-content:center;min-width:clamp(90px,7.6vw,195px)}
+.hchip.wide{min-width:clamp(140px,12.5vw,320px)}
 .traits{position:absolute;z-index:3;left:calc(50% + min(14vw,250px));bottom:28vh;padding:12px 16px;list-style:none}
 .traits li{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;padding:3px 0}
-.traits svg{width:14px;height:14px;fill:var(--y)}
+.traits svg{width:.85em;height:.85em;fill:var(--y)}
 .foot-l,.foot-r{position:absolute;bottom:4.5vh;z-index:3;font-size:13px;max-width:270px;line-height:1.4}
 .foot-l{left:var(--gut);color:var(--muted)}
 .foot-r{right:var(--gut)}
 
 /* stat block (shared by hero anchor + sidebar) */
 .st{display:flex;flex-direction:column;align-items:center;text-align:center}
-.st b{font-weight:900;font-stretch:125%;color:var(--y);font-size:40px;line-height:.9;letter-spacing:-.02em}
+.st b{font-weight:900;font-stretch:125%;color:var(--y);font-size:clamp(30px,2.8vw,72px);line-height:.9;letter-spacing:-.02em}
 .st small{font-size:13px;font-weight:700;line-height:1.15;margin-top:5px}
 
 /* buttons */
@@ -142,8 +142,8 @@ body.morph .morph-word{display:flex}
 main{position:relative;z-index:2}
 .section{position:relative;padding:clamp(90px,14vh,170px) var(--gut) clamp(90px,14vh,170px) var(--col)}
 .tag{display:inline-block;font-size:11px;font-weight:800;text-transform:uppercase;border:1.5px solid currentColor;border-radius:999px;padding:3px 9px;margin-bottom:14px;background:rgba(255,255,255,.18)}
-.h2{font-weight:800;font-size:clamp(40px,5.2vw,86px);line-height:1;letter-spacing:-.025em}
-.lead{font-size:clamp(15px,1.12vw,17px);max-width:390px;color:var(--muted);line-height:1.6}
+.h2{font-weight:800;font-size:clamp(40px,5.2vw,133px);line-height:1;letter-spacing:-.025em}
+.lead{font-size:clamp(15px,1.12vw,29px);max-width:390px;color:var(--muted);line-height:1.6}
 .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
 
 /* journey */
@@ -154,12 +154,12 @@ main{position:relative;z-index:2}
 .t-dot{position:absolute;width:13px;height:13px;margin:-6.5px 0 0 -6.5px;border-radius:50%;background:#cfc79f;border:1.5px solid rgba(0,0,0,.55);z-index:2;transition:background .4s,transform .5s var(--ease)}
 .t-dot.on{background:var(--y);transform:scale(1.25)}
 .t-vl{position:absolute;width:1px;background:rgba(0,0,0,.25);transform-origin:bottom;transform:scaleY(0)}
-.t-card{position:absolute;width:clamp(280px,27vw,410px);padding:24px 26px 22px;z-index:3;opacity:0}
+.t-card{position:absolute;width:clamp(280px,27vw,691px);padding:24px 26px 22px;z-index:3;opacity:0}
 .yr{display:flex;font-weight:900;font-stretch:125%;font-size:60px;line-height:1;color:var(--y);height:1em;overflow:hidden;margin-bottom:12px;letter-spacing:-.02em}
 .yr .dg{display:block;height:1em;overflow:hidden}
 .yr .col{display:flex;flex-direction:column}
 .yr .col i{font-style:normal;display:block;height:1em}
-.t-card h3{font-size:clamp(19px,1.45vw,22px);font-weight:800;line-height:1.15;margin-bottom:8px}
+.t-card h3{font-size:clamp(19px,1.45vw,37px);font-weight:800;line-height:1.15;margin-bottom:8px}
 .t-card p{font-size:15px;color:var(--muted);line-height:1.55}
 .t-meta{display:flex;align-items:center;justify-content:space-between;margin-top:18px;gap:10px}
 .who{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--muted);line-height:1.25}
@@ -187,15 +187,15 @@ main{position:relative;z-index:2}
 #projects .tag{background:none}
 .work-head{padding:0 var(--gut) 0 var(--col)}
 .work-pin{height:100vh;display:flex;align-items:center;overflow:hidden;position:relative}
-.work-track{display:flex;gap:clamp(16px,2.4vw,40px);padding:0 30vw 0 calc(var(--col) + 30vw);will-change:transform;align-items:center}
-.w-card{position:relative;flex:0 0 auto;width:clamp(280px,26vw,400px);aspect-ratio:.72;border-radius:14px;overflow:hidden;color:#fff;transform-origin:center}
+.work-track{display:flex;gap:clamp(16px,2.4vw,61px);padding:0 30vw 0 calc(var(--col) + 30vw);will-change:transform;align-items:center}
+.w-card{position:relative;flex:0 0 auto;width:clamp(280px,26vw,666px);aspect-ratio:.72;border-radius:14px;overflow:hidden;color:#fff;transform-origin:center}
 .w-card .media{position:absolute;inset:-6% -14%}
 .w-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),transparent 25%,transparent 50%,rgba(0,0,0,.85));pointer-events:none}
 .w-top{position:absolute;left:14px;right:14px;top:14px;display:flex;justify-content:space-between;z-index:2;gap:8px}
 .wp{font-size:12px;border:1px solid rgba(255,255,255,.22);background:rgba(0,0,0,.35);backdrop-filter:blur(6px);border-radius:999px;padding:3px 10px}
 .wps{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
 .w-bot{position:absolute;left:18px;right:18px;bottom:18px;z-index:2;display:flex;align-items:flex-end;gap:14px}
-.w-bot h3{font-size:clamp(24px,2vw,32px);font-weight:800;line-height:1}
+.w-bot h3{font-size:clamp(24px,2vw,51px);font-weight:800;line-height:1}
 .w-bot p{font-size:14px;color:rgba(255,255,255,.75);margin-top:8px;line-height:1.45}
 .arrow{flex:0 0 auto;width:34px;height:34px;border-radius:50%;background:var(--y);display:grid;place-items:center;transition:transform .6s var(--ease)}
 .arrow svg{width:13px;height:13px}
@@ -205,10 +205,10 @@ main{position:relative;z-index:2}
 
 /* what you get */
 #overview{text-align:center}
-.wyg{font-weight:800;font-size:clamp(70px,11vw,190px);line-height:.92;letter-spacing:-.04em;
+.wyg{font-weight:800;font-size:clamp(70px,11vw,282px);line-height:.92;letter-spacing:-.04em;
   background:linear-gradient(100deg,var(--ink) 0%,var(--ink) 45%,rgba(18,18,18,.18) 55%,rgba(18,18,18,.18) 100%);background-size:250% 100%;background-position:100% 0;
   -webkit-background-clip:text;background-clip:text;color:transparent}
-.statement{font-weight:800;font-size:clamp(28px,3.9vw,64px);line-height:1.14;letter-spacing:-.02em;max-width:1050px;margin:22px auto 0}
+.statement{font-weight:800;font-size:clamp(28px,3.9vw,100px);line-height:1.14;letter-spacing:-.02em;max-width:1050px;margin:22px auto 0}
 .statement .w{display:inline-block;opacity:.08;filter:blur(8px)}
 .cap{position:relative;display:inline-flex;align-items:center;gap:.18em;vertical-align:.08em;padding:.12em .3em;margin:0 .1em;border-radius:12px;background:rgba(255,255,255,.4);border:1px solid var(--glass-b);font-size:.62em;cursor:pointer;transform:scale(0);transition:background .3s}
 .cap:hover,.cap.open{background:rgba(255,255,255,.75)}
@@ -222,12 +222,12 @@ main{position:relative;z-index:2}
 
 /* services */
 .plans{display:grid;grid-template-columns:repeat(3,1fr);padding:10px;margin-top:clamp(40px,6vh,70px)}
-.plan{padding:clamp(20px,2.1vw,32px);border-radius:12px;display:flex;flex-direction:column}
+.plan{padding:clamp(20px,2.1vw,54px);border-radius:12px;display:flex;flex-direction:column}
 .plan.feat{background:rgba(0,0,0,.07)}
 .ph{display:flex;align-items:center;gap:10px;font-size:19px;font-weight:800}
 .ph i{width:30px;height:30px;border-radius:7px;background:var(--ink);display:grid;place-items:center}
 .ph svg{width:15px;height:15px;fill:var(--y)}
-.price{font-weight:800;font-size:clamp(28px,2.4vw,38px);line-height:1;margin:22px 0 14px;letter-spacing:-.02em}
+.price{font-weight:800;font-size:clamp(28px,2.4vw,61px);line-height:1;margin:22px 0 14px;letter-spacing:-.02em}
 .price small{font-size:14px;font-weight:500;color:var(--muted);letter-spacing:0}
 .plan>p{font-size:15px;color:var(--muted);min-height:4.6em}
 .plan ul{list-style:none;margin:24px 0;display:grid;gap:13px;flex:1}
@@ -237,7 +237,7 @@ main{position:relative;z-index:2}
 
 /* CTA */
 #cta{min-height:100vh;display:flex;flex-direction:column;justify-content:center}
-.cta-title{font-weight:800;font-size:clamp(46px,7vw,120px);line-height:.98;letter-spacing:-.035em}
+.cta-title{font-weight:800;font-size:clamp(46px,7vw,179px);line-height:.98;letter-spacing:-.035em}
 .cta-title .line>span{color:rgba(255,255,255,.85)}
 #cta .lead{margin-top:30px;max-width:440px}
 .chat{margin-top:34px;display:grid;gap:10px;justify-items:start}
@@ -253,8 +253,8 @@ main{position:relative;z-index:2}
 .dots i.on{background:var(--y);width:44px}
 .t-viewport{overflow:hidden;margin:clamp(30px,5vh,56px) calc(var(--gut) * -1) 0 0;touch-action:pan-y;user-select:none}
 .t-track{display:flex;gap:16px;width:max-content;padding-right:var(--gut);will-change:transform}
-.q-card{position:relative;width:clamp(280px,28vw,430px);padding:28px;display:flex;flex-direction:column;gap:18px;min-height:400px}
-.q-card h3{font-size:clamp(21px,1.7vw,27px);line-height:1.12;font-weight:800;padding-right:30px}
+.q-card{position:relative;width:clamp(280px,28vw,717px);padding:28px;display:flex;flex-direction:column;gap:18px;min-height:400px}
+.q-card h3{font-size:clamp(21px,1.7vw,44px);line-height:1.12;font-weight:800;padding-right:30px}
 .q-card .qm{position:absolute;right:22px;top:24px;width:24px;height:24px;border-radius:6px;background:var(--y);display:grid;place-items:center}
 .q-card .qm svg{width:12px;height:12px;fill:var(--ink)}
 .q-card blockquote{font-size:15px;color:var(--muted);flex:1;line-height:1.6}
@@ -290,56 +290,56 @@ main{position:relative;z-index:2}
    --fb = body font    (loaded via next/font in app/layout.js)
    If you buy a licence for the real fonts, add @font-face rules and put their names first in these two variables. */
 :root{--fh:var(--font-inter-tight),"Helvetica Neue",Arial,sans-serif;--fb:var(--font-inter),"Helvetica Neue",Arial,sans-serif}
-body{font-family:var(--fb);font-size:clamp(15px,1.18vw,22px);line-height:1.6}
+body{font-family:var(--fb);font-size:clamp(15px,1.18vw,30px);line-height:1.6}
 .h2,.hero-title,.wyg,.statement,.cta-title,.t-card h3,.w-bot h3,.ph,.price,.modal-box h3,.qa button,.btn,.s-nav a,.hero-nav .row,.traits li,.st small,.who,.read,.tip b{font-family:var(--fh)}
 /* hero */
-.hero-title{font-size:clamp(38px,5.3vw,110px);font-weight:700;line-height:1.03;letter-spacing:normal}
-.hero-nav .row{font-size:clamp(12px,1.18vw,20px);font-weight:500;line-height:1;letter-spacing:normal}
-.traits li{font-size:clamp(12px,1.18vw,20px);font-weight:500;line-height:1.1}
-.foot-l,.foot-r{font-family:var(--fb);font-size:clamp(13px,1.18vw,20px);line-height:1.6;max-width:clamp(260px,24vw,420px)}
-.st small{font-size:clamp(12px,1.04vw,18px)!important;font-weight:500;line-height:1.1}
-.btn{font-size:clamp(14px,1.18vw,20px);font-weight:500;line-height:1.6}
+.hero-title{font-size:clamp(38px,5.3vw,136px);font-weight:700;line-height:1.03;letter-spacing:normal}
+.hero-nav .row{font-size:clamp(12px,1.18vw,30px);font-weight:600;line-height:1;letter-spacing:normal}
+.traits li{font-size:clamp(12px,1.18vw,30px);font-weight:500;line-height:1.1}
+.foot-l,.foot-r{font-family:var(--fb);font-size:clamp(13px,1.18vw,30px);line-height:1.6;max-width:clamp(260px,24vw,614px)}
+.st small{font-size:clamp(12px,1.04vw,27px)!important;font-weight:500;line-height:1.1}
+.btn{font-size:clamp(14px,1.18vw,30px);font-weight:500;line-height:1.6}
 /* sidebar */
-.s-nav a{font-size:clamp(13px,1.25vw,20px);font-weight:500;line-height:1}
-.s-blurb{font-size:clamp(12px,1vw,16px);line-height:1.6}
-.mail button{font-size:clamp(13px,1.18vw,18px)}
+.s-nav a{font-size:clamp(13px,1.25vw,32px);font-weight:500;line-height:1}
+.s-blurb{font-size:clamp(12px,1vw,26px);line-height:1.6}
+.mail button{font-size:clamp(13px,1.18vw,30px)}
 /* common */
-.tag{font-family:var(--fb);font-size:clamp(10px,.97vw,16px);font-weight:700;line-height:1}
-.h2{font-size:clamp(38px,4.58vw,90px);font-weight:500;line-height:1;letter-spacing:normal}
-.lead{font-size:clamp(15px,1.18vw,22px);line-height:1.6}
+.tag{font-family:var(--fb);font-size:clamp(10px,.97vw,25px);font-weight:700;line-height:1}
+.h2{font-size:clamp(38px,4.58vw,117px);font-weight:500;line-height:1;letter-spacing:normal}
+.lead{font-size:clamp(15px,1.18vw,30px);line-height:1.6}
 /* journey */
-.t-card h3{font-size:clamp(19px,1.67vw,30px);font-weight:500;line-height:1.1}
-.t-card p{font-size:clamp(14px,1.18vw,20px);line-height:1.6}
-.who{font-size:clamp(13px,1.18vw,18px);font-weight:400;line-height:1.3}
-.read{font-size:clamp(12px,.97vw,16px);font-weight:400;line-height:1.6}
-.modal-box .big{font-family:var(--fh);font-stretch:100%;font-size:clamp(56px,5.56vw,110px);font-weight:700;line-height:.9}
-.modal-box h3{font-size:clamp(28px,3.19vw,60px);font-weight:500;line-height:1}
-.modal-box p{font-size:clamp(15px,1.18vw,20px);line-height:1.6}
+.t-card h3{font-size:clamp(19px,1.67vw,43px);font-weight:500;line-height:1.1}
+.t-card p{font-size:clamp(14px,1.18vw,30px);line-height:1.6}
+.who{font-size:clamp(13px,1.18vw,30px);font-weight:400;line-height:1.3}
+.read{font-size:clamp(12px,.97vw,25px);font-weight:400;line-height:1.6}
+.modal-box .big{font-family:var(--fh);font-stretch:100%;font-size:clamp(56px,5.56vw,142px);font-weight:700;line-height:.9}
+.modal-box h3{font-size:clamp(28px,3.19vw,82px);font-weight:500;line-height:1}
+.modal-box p{font-size:clamp(15px,1.18vw,30px);line-height:1.6}
 /* projects */
-.w-bot h3{font-size:clamp(22px,1.94vw,36px);font-weight:500;line-height:1}
-.w-bot p{font-size:clamp(14px,1.18vw,19px);line-height:1.3}
-.wp{font-size:clamp(11px,.97vw,15px);line-height:1}
+.w-bot h3{font-size:clamp(22px,1.94vw,50px);font-weight:500;line-height:1}
+.w-bot p{font-size:clamp(14px,1.18vw,30px);line-height:1.3}
+.wp{font-size:clamp(11px,.97vw,25px);line-height:1}
 /* what you get */
-.wyg{font-size:clamp(64px,12.5vw,260px);font-weight:700;line-height:.9;letter-spacing:-.25vw}
-.statement{font-size:clamp(26px,4.72vw,96px);font-weight:700;line-height:1.1;letter-spacing:-.09vw}
-.tip{font-family:var(--fb);font-size:clamp(14px,1.18vw,18px);line-height:1.4}
-.tip b{font-size:clamp(16px,1.39vw,24px);font-weight:500;line-height:1}
+.wyg{font-size:clamp(64px,12.5vw,320px);font-weight:700;line-height:.9;letter-spacing:-.25vw}
+.statement{font-size:clamp(26px,4.72vw,121px);font-weight:700;line-height:1.1;letter-spacing:-.09vw}
+.tip{font-family:var(--fb);font-size:clamp(14px,1.18vw,30px);line-height:1.4}
+.tip b{font-size:clamp(16px,1.39vw,36px);font-weight:500;line-height:1}
 /* services */
-.ph{font-size:clamp(17px,1.53vw,26px);font-weight:500;line-height:1}
-.price{font-size:clamp(22px,1.67vw,30px);font-weight:500;line-height:1}
-.price small{font-family:var(--fb);font-size:clamp(11px,.97vw,15px);font-weight:500}
-.plan>p,.plan li,.note{font-size:clamp(14px,1.18vw,19px);line-height:1.6}
+.ph{font-size:clamp(17px,1.53vw,39px);font-weight:500;line-height:1}
+.price{font-size:clamp(22px,1.67vw,43px);font-weight:500;line-height:1}
+.price small{font-family:var(--fb);font-size:clamp(11px,.97vw,25px);font-weight:500}
+.plan>p,.plan li,.note{font-size:clamp(14px,1.18vw,30px);line-height:1.6}
 /* cta */
-.cta-title{font-size:clamp(44px,7.64vw,150px);font-weight:500;line-height:1;letter-spacing:-.23vw}
-.bubble p{font-size:clamp(14px,1.18vw,19px);font-weight:400;line-height:1.6}
+.cta-title{font-size:clamp(44px,7.64vw,196px);font-weight:500;line-height:1;letter-spacing:-.23vw}
+.bubble p{font-size:clamp(14px,1.18vw,30px);font-weight:400;line-height:1.6}
 /* testimonials */
-.q-card h3{font-family:var(--fb);font-size:clamp(20px,2.08vw,36px);font-weight:700;line-height:1.1}
-.q-card blockquote{font-size:clamp(14px,1.18vw,19px);line-height:1.6}
-.q-who b{font-size:clamp(14px,1.18vw,19px);font-weight:500}
-.q-who small{font-size:clamp(12px,.97vw,15px);color:rgba(0,0,0,.7)}
+.q-card h3{font-family:var(--fb);font-size:clamp(20px,2.08vw,53px);font-weight:700;line-height:1.1}
+.q-card blockquote{font-size:clamp(14px,1.18vw,30px);line-height:1.6}
+.q-who b{font-size:clamp(14px,1.18vw,30px);font-weight:500}
+.q-who small{font-size:clamp(12px,.97vw,25px);color:rgba(0,0,0,.7)}
 /* faq */
-.qa button{font-size:clamp(14px,1.32vw,22px);font-weight:500;line-height:1.4;letter-spacing:-.01vw}
-.qa .ans p{font-size:clamp(14px,1.18vw,19px);line-height:1.6}
+.qa button{font-size:clamp(14px,1.32vw,34px);font-weight:500;line-height:1.4;letter-spacing:-.01vw}
+.qa .ans p{font-size:clamp(14px,1.18vw,30px);line-height:1.6}
 
 /* ============ RESPONSIVE ============ */
 
@@ -391,16 +391,16 @@ body{font-family:var(--fb);font-size:clamp(15px,1.18vw,22px);line-height:1.6}
 
 /* ================= SIDEBAR SIZING — matched to the reference layout (full-height column, vw-based) ================= */
 @media (min-width:1200px){
-  :root{--side:clamp(220px,18.1vw,330px)}
+  :root{--side:clamp(220px,18.1vw,463px)}
   .side{left:1.37vw;top:1.24vw;bottom:1.24vw;width:var(--side);gap:1.04vw}
   .s-brand{flex:1 1 auto;min-height:0;padding:1.11vw;display:flex;flex-direction:column}
   .s-top{margin-bottom:1.1vw}
   .pill{padding:.45vw .7vw;border-radius:.56vw}
-  .pill .sp{font-size:clamp(14px,1.25vw,22px)}
+  .pill .sp{font-size:clamp(14px,1.25vw,32px)}
   .socials a{width:1.6vw;height:1.6vw;min-width:22px;min-height:22px}
   .s-stats{flex:0 0 auto;height:7.82vw;padding:1vw 1.67vw}
   .s-stats .div{height:60%}
-  .s-stats .st b{font-size:clamp(24px,2.5vw,44px)}
+  .s-stats .st b{font-size:clamp(24px,2.5vw,64px)}
   .s-nav{flex:0 0 auto;padding:1.11vw;gap:.69vw}
   .s-nav a{height:2.41vw;min-height:28px;padding:0 .69vw;gap:.69vw;border-radius:.56vw}
   .s-nav .ic{width:1.11vw;height:1.11vw;min-width:12px;min-height:12px}
@@ -425,7 +425,7 @@ body{font-family:var(--fb);font-size:clamp(15px,1.18vw,22px);line-height:1.6}
 @media (min-width:1200px){
   .s-brand{justify-content:space-between}
   .s-top{margin-bottom:0}
-  .s-blurb{color:#3c3934;font-size:clamp(12px,.98vw,16px);line-height:1.6;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+  .s-blurb{color:#3c3934;font-size:clamp(12px,.98vw,25px);line-height:1.6;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
   .s-stats{height:auto;padding:1.4vw 1.2vw}
 }
 body.dark .s-nav a{color:#eee}
@@ -437,6 +437,7 @@ body.dark .s-blurb{color:#bbb}
 
 /* ================= RESPONSIVE REFINEMENTS ================= */
 html,body{overflow-x:clip}
+html{scrollbar-gutter:stable}
 #overview{overflow-x:clip}
 .tip{max-width:min(260px,78vw)}
 /* desktop hero: keep chips and traits clear of the headline, scale headline on short screens */
@@ -446,11 +447,11 @@ html,body{overflow-x:clip}
   .traits{left:calc(50% + min(17vw,22vh + 5vw))}
   .foot-r{max-width:min(22vw,330px)}
 }
-@media (min-width:1200px) and (max-height:820px){
+@media (min-width:1200px) and (max-height:820px),(min-width:1200px) and (min-aspect-ratio:17/10){
   .s-blurb{-webkit-line-clamp:2!important}
   .s-nav{gap:.45vw}
   .s-nav a{height:2.15vw}
-  .hchip{padding:12px 14px}
+  .hchip{padding:clamp(12px,.95vw,24px) clamp(14px,1.1vw,28px)}
   .hero-center{bottom:4vh}
 }
 @media (min-width:1200px) and (max-height:700px){ .s-blurb{display:none!important} .marquee{display:none!important} }
