@@ -217,9 +217,9 @@ main{position:relative;z-index:2}
 .cap .car{width:.22em;height:.22em;border-radius:50%;background:var(--y);transition:transform .4s var(--ease)}
 .cap.open .car{transform:scale(1.6)}
 .tip{position:absolute;left:50%;bottom:calc(100% + 12px);width:260px;padding:16px 18px;text-align:left;font-size:14px;line-height:1.5;letter-spacing:0;font-weight:400;color:var(--muted);
-  background:#ece8dd;border-radius:12px;box-shadow:0 20px 40px -20px rgba(0,0,0,.35);opacity:0;pointer-events:none;transform:translate(-50%,10px) scale(.96);transition:.4s var(--ease);z-index:5}
+  background:#ece8dd;border-radius:12px;box-shadow:0 20px 40px -20px rgba(0,0,0,.35);opacity:0;pointer-events:none;transform:translate(calc(-50% + var(--dx,0px)),10px) scale(.96);transition:.4s var(--ease);z-index:5}
 .tip b{display:block;color:var(--ink);font-size:16px;margin-bottom:4px;font-weight:800}
-.cap.open .tip{opacity:1;transform:translate(-50%,0)}
+.cap.open .tip{opacity:1;transform:translate(calc(-50% + var(--dx,0px)),0)}
 
 /* services */
 .plans{display:grid;grid-template-columns:repeat(3,1fr);padding:10px;margin-top:clamp(40px,6vh,70px)}
@@ -626,3 +626,17 @@ body.side-on .cw .cw-fab{pointer-events:auto}
 .plan>p{min-height:0}
 .plan ul{margin:20px 0 24px}
 .plan-btn{align-self:flex-start;margin-bottom:22px}
+
+/* services on tablets: the full-width third card lays its list out in two columns */
+@media (min-width:768px) and (max-width:1199px){
+  .plans .plan:last-child ul{display:grid;grid-template-columns:1fr 1fr;column-gap:28px}
+}
+/* small phones: roomier service cards, compact round Contact button */
+@media (max-width:480px){
+  .plans{padding:6px}
+  .plan{padding:18px 16px}
+  .cw-fab{width:54px;height:54px;padding:0;justify-content:center}
+  .cw-fab span{display:none}
+  .cw-fab svg{width:24px;height:24px}
+  .cw-item{min-width:0;width:min(280px,calc(100vw - 32px))}
+}
