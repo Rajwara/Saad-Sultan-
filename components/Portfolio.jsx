@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { initMotion } from '@/lib/motion';
 import ProjectDrawer, { openProject } from '@/components/ProjectDrawer';
-import { WORD, FULL_NAME, EMAIL, SOCIALS, BLURB, STATS, JOURNEY, PROJECTS, CAPS, STATEMENT, QUOTES, CLIENT_LOGOS, FAQS } from '@/lib/content';
+import Contact from '@/components/Contact';
+import { WORD, FULL_NAME, EMAIL, CONTACT, SOCIALS, BLURB, STATS, JOURNEY, PROJECTS, CAPS, STATEMENT, QUOTES, CLIENT_LOGOS, FAQS } from '@/lib/content';
 
 const pad = n => String(n).padStart(2, '0');
 
@@ -123,7 +124,7 @@ export default function Portfolio() {
         <div className="panel mail fi"><span className="pbg" />
           <button data-copy={EMAIL} title={EMAIL}><span className="em">{EMAIL}</span><svg viewBox="0 0 24 24"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12zm3 4H8a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2" /></svg></button>
         </div>
-        <a href="#cta" className="btn s-btn mv" data-anchor="a-btn" data-btn="1">Book a Call</a>
+        <a href="#cta" className="btn s-btn mv" data-anchor="a-btn" data-btn="1" data-book>Book a Call</a>
       </aside>
 
       {/* mobile top bar + menu */}
@@ -157,7 +158,7 @@ export default function Portfolio() {
         </ul>
         <div className="hero-center">
           <h1 className="hero-title"><Line>Websites,</Line><Line>Built to</Line><Line>Stand Out.</Line></h1>
-          <div className="hero-cta"><a href="#cta" className="btn anc" id="a-btn">Book a Call</a><a href="#about" className="btn hfade">About Me</a></div>
+          <div className="hero-cta"><a href="#cta" className="btn anc" id="a-btn" data-book>Book a Call</a><a href="#about" className="btn hfade">About Me</a></div>
         </div>
         <p className="foot-l hfade">The web developer for bold brands.<br />That&apos;s Saad.</p>
         <p className="foot-r hfade">{BLURB}</p>
@@ -270,7 +271,7 @@ export default function Portfolio() {
           <p className="lead rv">Every website has room to grow. Get a clear view of what works, what holds you back, and how to make it faster and easier to manage.</p>
           <div className="chat">
             <div className="bubble"><div className="media" data-label=""><Img src="/images/avatar-me.jpg" /></div><p>Have something in mind?</p></div>
-            <a href={'mailto:' + EMAIL} className="btn">Let&apos;s Talk</a>
+            <div className="cta-btns"><a href="#contact" className="btn" data-contact>Let&apos;s Talk</a><a href={`https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(CONTACT.whatsappMessage)}`} className="btn dark" target="_blank" rel="noopener noreferrer">WhatsApp me</a>{CONTACT.calendly && <a href="#cta" className="btn dark" data-book>Book a call</a>}</div>
           </div>
         </section>
 
@@ -308,6 +309,7 @@ export default function Portfolio() {
       <div className="endbar"><span>© <span suppressHydrationWarning>{new Date().getFullYear()}</span> {FULL_NAME}. All rights reserved.</span><a href="#home">Back to top ↑</a></div>
 
       <ProjectDrawer />
+      <Contact />
 
       <div className="modal" role="dialog" aria-modal="true"><div className="modal-bg" />
         <div className="modal-box"><button className="modal-x" aria-label="Close">×</button><div className="big" /><h3 /><p /></div>

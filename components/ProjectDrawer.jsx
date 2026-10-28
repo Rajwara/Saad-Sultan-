@@ -87,7 +87,7 @@ export default function ProjectDrawer() {
             <div className="pd-tags">{p.tags.map(t => <span key={t}>{t}</span>)}</div>
 
             <div className="pd-cta">
-              <a href="#cta" className="btn dark" onClick={() => {
+              <a href="#cta" className="btn dark" data-book onClick={() => {
                 // resume page scrolling right away so the page can scroll to the contact section
                 window.dispatchEvent(new CustomEvent('project:drawer', { detail: false }));
                 close();
