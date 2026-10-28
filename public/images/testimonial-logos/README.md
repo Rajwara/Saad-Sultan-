@@ -4,7 +4,7 @@ Client logos shown in the circle on each testimonial card. Square images work be
 
 | File | Client | Company |
 |---|---|---|
-| `shopslim.jpg` | Angelo | Shop Slim |
+| `shopslim.jpg` | Angelo | ShopSemlim |
 | `contigo.jpg` | Zahran Haji | Contigo |
 | `boss.jpg` | Sage | Get Boss Now |
 | `moda.svg` | Marcos | ModaHF |
