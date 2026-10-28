@@ -6,6 +6,7 @@ import { EMAIL, CONTACT, FORM_OPTIONS } from '@/lib/content';
    Optional env vars: CONTACT_EMAIL (defaults to EMAIL in lib/content.js),
    CONTACT_FROM (defaults to Resend's test sender), CALLMEBOT_PHONE (defaults to CONTACT.whatsapp). */
 export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic'; // read the env vars at request time
 
 const LIMITS = { name: 100, email: 200, phone: 40, service: 80, budget: 40, timeline: 40, website: 300, message: 4000 };
 const esc = s => s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -26,35 +27,57 @@ export async function POST(req) {
   const rows = [['Name', f.name], ['Email', f.email], ['Phone / WhatsApp', f.phone], ['Service', f.service], ['Budget', f.budget], ['Timeline', f.timeline], ['Current website', f.website]].filter(([, v]) => v);
   const text = `New enquiry from your portfolio\n\n${rows.map(([k, v]) => `${k}: ${v}`).join('\n')}\n\nProject details:\n${f.message}`;
 
+  // each sender resolves to { ok, detail } so failures can be explained in the Vercel logs
   const tasks = [];
   if (process.env.RESEND_API_KEY) {
-    tasks.push(['email', fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        from: process.env.CONTACT_FROM || 'Portfolio <onboarding@resend.dev>',
-        to: [process.env.CONTACT_EMAIL || EMAIL],
-        reply_to: f.email,
-        subject: `New enquiry: ${f.service} — ${f.name}`,
-        text,
-        html: `<h2 style="margin:0 0 12px">New enquiry from your portfolio</h2>
+    tasks.push(['email', (async () => {
+      const res = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY.trim()}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          from: process.env.CONTACT_FROM || 'Portfolio <onboarding@resend.dev>',
+          to: [process.env.CONTACT_EMAIL || EMAIL],
+          reply_to: f.email,
+          subject: `New enquiry: ${f.service} — ${f.name}`,
+          text,
+          html: `<h2 style="margin:0 0 12px">New enquiry from your portfolio</h2>
 <table cellpadding="6" style="border-collapse:collapse">${rows.map(([k, v]) => `<tr><td style="color:#666">${esc(k)}</td><td><b>${esc(v)}</b></td></tr>`).join('')}</table>
 <h3 style="margin:18px 0 6px">Project details</h3><p style="white-space:pre-wrap">${esc(f.message)}</p>`,
-      }),
-    })]);
+        }),
+      });
+      return { ok: res.ok, detail: `${res.status} ${(await res.text()).slice(0, 300)}` };
+    })()]);
   }
   if (process.env.CALLMEBOT_API_KEY) {
-    const phone = process.env.CALLMEBOT_PHONE || CONTACT.whatsapp;
-    const url = `https://api.callmebot.com/whatsapp.php?phone=${encodeURIComponent(phone)}&text=${encodeURIComponent(text.slice(0, 1500))}&apikey=${encodeURIComponent(process.env.CALLMEBOT_API_KEY)}`;
-    tasks.push(['whatsapp', fetch(url)]);
+    tasks.push(['whatsapp', (async () => {
+      const phone = (process.env.CALLMEBOT_PHONE || CONTACT.whatsapp).replace(/[^\d+]/g, '');
+      const url = `https://api.callmebot.com/whatsapp.php?phone=${encodeURIComponent(phone)}&text=${encodeURIComponent(text.slice(0, 1500))}&apikey=${encodeURIComponent(process.env.CALLMEBOT_API_KEY.trim())}`;
+      const res = await fetch(url);
+      const body = (await res.text()).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+      // CallMeBot answers 200 even for a wrong key, so check what it says
+      return { ok: res.ok && /queued|sent/i.test(body) && !/invalid|error|not\s+(allowed|activated)/i.test(body), detail: `${res.status} ${body.slice(0, 300)}` };
+    })()]);
   }
-  if (!tasks.length) return Response.json({ ok: false, error: 'The contact form is not set up yet.' }, { status: 503 });
+  if (!tasks.length) {
+    console.error('contact: no RESEND_API_KEY or CALLMEBOT_API_KEY set — add them in Vercel and redeploy');
+    return Response.json({ ok: false, error: 'The contact form is not set up yet.' }, { status: 503 });
+  }
 
   const results = await Promise.allSettled(tasks.map(([, t]) => t));
-  const sent = tasks.filter((_, i) => results[i].status === 'fulfilled' && results[i].value.ok).map(([k]) => k);
+  const sent = [], failed = [];
   results.forEach((r, i) => {
-    if (!(r.status === 'fulfilled' && r.value.ok)) console.error(`contact: ${tasks[i][0]} failed`, r.status === 'fulfilled' ? r.value.status : r.reason);
+    const name = tasks[i][0];
+    if (r.status === 'fulfilled' && r.value.ok) sent.push(name);
+    else { failed.push(name); console.error(`contact: ${name} failed —`, r.status === 'fulfilled' ? r.value.detail : String(r.reason)); }
   });
-  if (!sent.length) return Response.json({ ok: false, error: 'Your message could not be sent.' }, { status: 502 });
-  return Response.json({ ok: true, sent });
+  if (!sent.length) return Response.json({ ok: false, error: 'Your message could not be sent.', failed }, { status: 502 });
+  return Response.json({ ok: true, sent, failed });
+}
+
+/* Open /api/contact in a browser to check the setup (shows no secrets) */
+export function GET() {
+  return Response.json({
+    email: process.env.RESEND_API_KEY ? `ready — sends to ${process.env.CONTACT_EMAIL || EMAIL}` : 'NOT SET UP — add RESEND_API_KEY in Vercel, then redeploy',
+    whatsapp: process.env.CALLMEBOT_API_KEY ? `ready — sends to +${(process.env.CALLMEBOT_PHONE || CONTACT.whatsapp).replace(/\D/g, '')}` : 'NOT SET UP — add CALLMEBOT_API_KEY in Vercel, then redeploy',
+  });
 }
