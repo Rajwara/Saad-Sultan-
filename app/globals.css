@@ -571,18 +571,18 @@ html.drawer-open{overflow:hidden}
 .cta-btns .btn.dark{background:var(--ink);color:var(--y)}
 @media (max-width:767px){.cta-btns{margin-left:0}}
 
-.cw{position:fixed;z-index:170;left:16px;bottom:16px;display:flex;flex-direction:column;align-items:flex-start;gap:10px;pointer-events:none;
+.cw{position:fixed;z-index:170;right:16px;bottom:16px;display:flex;flex-direction:column;align-items:flex-end;gap:10px;pointer-events:none;
   opacity:0;transform:translateY(20px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
 body.side-on .cw{opacity:1;transform:none}
 body.side-on .cw .cw-fab{pointer-events:auto}
-@media (min-width:1200px){ .cw{left:calc(1.37vw + var(--side) + clamp(12px,1vw,24px));bottom:1.24vw} }
+@media (min-width:1200px){ .cw{right:clamp(16px,1.37vw,36px);bottom:1.24vw} }
 .cw-fab{display:inline-flex;align-items:center;gap:.5em;height:clamp(48px,3.4vw,72px);padding:0 1.3em 0 1.05em;border-radius:999px;background:var(--ink);color:var(--y);
   font-family:var(--fh);font-weight:600;font-size:clamp(15px,1.05vw,22px);box-shadow:0 14px 30px -12px rgba(0,0,0,.45);transition:transform .4s var(--ease)}
 .cw-fab:hover{transform:translateY(-2px)}
 .cw-fab svg{width:1.3em;height:1.3em;fill:currentColor}
 .cw-menu{display:flex;flex-direction:column;gap:8px}
 .cw-item{display:flex;align-items:center;gap:12px;min-width:clamp(230px,15vw,330px);padding:12px 18px 12px 12px;border-radius:16px;background:#f1ede2;color:var(--ink);text-align:left;
-  box-shadow:0 14px 34px -14px rgba(0,0,0,.4);border:1px solid rgba(0,0,0,.06);opacity:0;transform:translateY(14px) scale(.96);transform-origin:left bottom;
+  box-shadow:0 14px 34px -14px rgba(0,0,0,.4);border:1px solid rgba(0,0,0,.06);opacity:0;transform:translateY(14px) scale(.96);transform-origin:right bottom;
   transition:opacity .35s var(--ease),transform .45s var(--ease),background .3s}
 .cw.open .cw-item{opacity:1;transform:none;pointer-events:auto}
 .cw.open .cw-item:nth-last-child(2){transition-delay:.05s}
@@ -593,9 +593,8 @@ body.side-on .cw .cw-fab{pointer-events:auto}
 .cw-item b{display:block;font-family:var(--fh);font-size:clamp(15px,1.05vw,21px);font-weight:600;line-height:1.2}
 .cw-item small{display:block;font-size:clamp(12px,.85vw,17px);color:var(--muted);line-height:1.3}
 
-/* the form panel slides in from the left, next to the button */
-.cf .pd-panel{left:0;right:auto;transform:translateX(-104%);box-shadow:30px 0 80px -30px rgba(0,0,0,.45);width:min(clamp(460px,38vw,860px),100vw)}
-.cf.open .pd-panel{transform:none}
+/* the form panel slides in from the right, next to the button */
+.cf .pd-panel{width:min(clamp(460px,38vw,860px),100vw)}
 .cf .pd-content{padding-top:clamp(56px,4.4vw,96px)}
 .cf-form{display:grid;gap:14px;margin-top:clamp(18px,1.6vw,34px)}
 .cf-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
