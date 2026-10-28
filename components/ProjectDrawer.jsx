@@ -19,7 +19,7 @@ function Cover({ p }) {
   return (
     <div className="media pd-cover" data-label={`${p.name} image\nimages/portfolio/${p.image}`}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      {!failed && <img ref={ref} src={`/images/portfolio/${p.image}`} alt={p.name} onError={() => setFailed(true)} />}
+      {!failed && <img ref={ref} src={`/images/portfolio/${p.image}`} alt={`${p.name} — ${p.type}`} onError={() => setFailed(true)} />}
     </div>
   );
 }

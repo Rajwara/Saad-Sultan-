@@ -9,7 +9,7 @@ import { WORD, FULL_NAME, EMAIL, CONTACT, SOCIALS, BLURB, STATS, JOURNEY, PROJEC
 const pad = n => String(n).padStart(2, '0');
 
 /* <img> that removes itself when the file is missing, so the placeholder behind it shows */
-function Img({ src, alt = '', onLoad }) {
+function Img({ src, alt = '', onLoad, eager = false }) {
   const ref = useRef(null);
   const [failed, setFailed] = useState(false);
   useEffect(() => {
@@ -18,7 +18,7 @@ function Img({ src, alt = '', onLoad }) {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
   if (failed) return null;
   // eslint-disable-next-line @next/next/no-img-element
-  return <img ref={ref} src={src} alt={alt} onLoad={onLoad} onError={() => setFailed(true)} />;
+  return <img ref={ref} src={src} alt={alt} onLoad={onLoad} onError={() => setFailed(true)} loading={eager ? 'eager' : 'lazy'} decoding="async" {...(eager && { fetchPriority: 'high' })} />;
 }
 
 function Portrait() {
@@ -26,7 +26,7 @@ function Portrait() {
   return (
     <div className="portrait">
       {!loaded && <div className="ph-person" />}
-      <div className="media"><Img src="/images/portrait.webp" alt={`Portrait of ${FULL_NAME}`} onLoad={() => setLoaded(true)} /></div>
+      <div className="media"><Img src="/images/portrait.webp" alt={`Portrait of ${FULL_NAME}`} onLoad={() => setLoaded(true)} eager /></div>
     </div>
   );
 }
@@ -212,7 +212,7 @@ export default function Portfolio() {
           <div className="work-pin"><div className="work-track" id="workTrack">
             {PROJECTS.map((p, i) => (
               <a href={`#project-${i + 1}`} className="w-card" data-cursor="VIEW" key={i} aria-label={`${p.name} — view project details`} onClick={e => { e.preventDefault(); openProject(i); }}>
-                <div className="media" data-label={`${p.name} image\nimages/portfolio/${p.image}`}><Img src={`/images/portfolio/${p.image}`} alt={p.name} /></div>
+                <div className="media" data-label={`${p.name} image\nimages/portfolio/${p.image}`}><Img src={`/images/portfolio/${p.image}`} alt={`${p.name} — ${p.type} by ${FULL_NAME}`} /></div>
                 <div className="w-top"><span className="wp">{pad(i + 1)}</span><span className="wps">{cardTags(p.tags).map(t => <span className="wp" key={t}>{t}</span>)}</span></div>
                 <div className="w-bot">
                   <div><h3>{p.name}</h3><p>{p.desc}</p></div>
