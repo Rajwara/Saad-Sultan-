@@ -34,6 +34,12 @@ const Odometer = ({ d }) => (
   <span className="dg"><span className="col" data-d={d}>{Array.from({ length: 20 }, (_, k) => <i key={k}>{k % 10}</i>)}</span></span>
 );
 
+/* tags that fit on one row of a project card (the panel shows them all) */
+const cardTags = tags => {
+  let len = 0;
+  return tags.filter((t, i) => (len += t.length) <= 24 || i === 0).slice(0, 3);
+};
+
 const Line = ({ children }) => <span className="line"><span>{children}</span></span>;
 
 const NAV = [
@@ -200,7 +206,7 @@ export default function Portfolio() {
             {PROJECTS.map((p, i) => (
               <a href={`#project-${i + 1}`} className="w-card" data-cursor="VIEW" key={i} aria-label={`${p.name} — view project details`} onClick={e => { e.preventDefault(); openProject(i); }}>
                 <div className="media" data-label={`${p.name} image\nimages/portfolio/${p.image}`}><Img src={`/images/portfolio/${p.image}`} alt={p.name} /></div>
-                <div className="w-top"><span className="wp">{pad(i + 1)}</span><span className="wps">{p.tags.map(t => <span className="wp" key={t}>{t}</span>)}</span></div>
+                <div className="w-top"><span className="wp">{pad(i + 1)}</span><span className="wps">{cardTags(p.tags).map(t => <span className="wp" key={t}>{t}</span>)}</span></div>
                 <div className="w-bot">
                   <div><h3>{p.name}</h3><p>{p.desc}</p></div>
                   <span className="arrow"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" stroke="#121212" strokeWidth="2.6" fill="none" /></svg></span>
