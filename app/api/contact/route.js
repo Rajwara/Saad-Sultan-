@@ -67,7 +67,7 @@ export async function POST(req) {
   const sent = [], failed = [];
   results.forEach((r, i) => {
     const name = tasks[i][0];
-    if (r.status === 'fulfilled' && r.value.ok) sent.push(name);
+    if (r.status === 'fulfilled' && r.value.ok) { sent.push(name); console.log(`contact: ${name} sent —`, r.value.detail); }
     else { failed.push(name); console.error(`contact: ${name} failed —`, r.status === 'fulfilled' ? r.value.detail : String(r.reason)); }
   });
   if (!sent.length) return Response.json({ ok: false, error: 'Your message could not be sent.', failed }, { status: 502 });
