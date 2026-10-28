@@ -16,8 +16,11 @@ export async function POST(req) {
   let body;
   try { body = await req.json(); } catch { return Response.json({ ok: false, error: 'Invalid request' }, { status: 400 }); }
 
-  // bots fill the hidden "company" field; pretend it worked
-  if (body.company) return Response.json({ ok: true });
+  // bots fill the hidden spam-trap field; pretend it worked, but leave a trace in the logs
+  if (body.hp_check) {
+    console.warn('contact: dropped — spam-trap field was filled', JSON.stringify({ email: body.email, name: body.name }).slice(0, 200));
+    return Response.json({ ok: true });
+  }
 
   const f = Object.fromEntries(Object.entries(LIMITS).map(([k, max]) => [k, clean(body[k], max)]));
   if (!f.name || !f.email || !f.phone || !f.service || !f.message) return Response.json({ ok: false, error: 'Please fill in all required fields.' }, { status: 400 });

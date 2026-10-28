@@ -32,7 +32,7 @@ const Icon = {
 };
 const Svg = ({ d }) => <svg viewBox="0 0 24 24" aria-hidden="true"><path d={d} /></svg>;
 
-const EMPTY = { name: '', email: '', phone: '', service: '', budget: '', timeline: '', website: '', message: '', company: '' };
+const EMPTY = { name: '', email: '', phone: '', service: '', budget: '', timeline: '', website: '', message: '', hp_check: '' };
 
 function ContactForm({ onClose }) {
   const [f, setF] = useState(EMPTY);
@@ -97,8 +97,9 @@ function ContactForm({ onClose }) {
       </div>
       <label><span className="cf-l">Current website <em>(optional)</em></span><input type="url" inputMode="url" value={f.website} onChange={set('website')} placeholder="https://" /></label>
       <label>Project details *<textarea required rows={5} value={f.message} onChange={set('message')} placeholder="What are you building, and what do you need help with?" /></label>
-      {/* honeypot — hidden from people, bots fill it */}
-      <label className="cf-hp" aria-hidden="true">Company<input tabIndex={-1} autoComplete="off" value={f.company} onChange={set('company')} /></label>
+      {/* spam trap — hidden from people, bots fill it. Its label/name must not look like a real field
+          (e.g. "Company"), or browser autofill fills it and real messages get dropped */}
+      <div className="cf-hp" aria-hidden="true"><label>Leave this field empty<input name="hp_check" type="text" tabIndex={-1} autoComplete="off" data-lpignore="true" data-1p-ignore value={f.hp_check} onChange={set('hp_check')} /></label></div>
 
       {status === 'failed' && (
         <div className="cf-error" role="alert">
