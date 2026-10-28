@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { initMotion } from '@/lib/motion';
+import ProjectDrawer, { openProject } from '@/components/ProjectDrawer';
 import { WORD, FULL_NAME, EMAIL, SOCIALS, BLURB, STATS, JOURNEY, PROJECTS, CAPS, STATEMENT, QUOTES, CLIENT_LOGOS, FAQS } from '@/lib/content';
 
 const pad = n => String(n).padStart(2, '0');
@@ -197,7 +198,7 @@ export default function Portfolio() {
           </div>
           <div className="work-pin"><div className="work-track" id="workTrack">
             {PROJECTS.map((p, i) => (
-              <a href={p.href} className="w-card" data-cursor="CLICK" key={i}>
+              <a href={`#project-${i + 1}`} className="w-card" data-cursor="VIEW" key={i} aria-label={`${p.name} — view project details`} onClick={e => { e.preventDefault(); openProject(i); }}>
                 <div className="media" data-label={`${p.name} image\nimages/portfolio/${p.image}`}><Img src={`/images/portfolio/${p.image}`} alt={p.name} /></div>
                 <div className="w-top"><span className="wp">{pad(i + 1)}</span><span className="wps">{p.tags.map(t => <span className="wp" key={t}>{t}</span>)}</span></div>
                 <div className="w-bot">
@@ -299,6 +300,8 @@ export default function Portfolio() {
         </section>
       </main>
       <div className="endbar"><span>© <span suppressHydrationWarning>{new Date().getFullYear()}</span> {FULL_NAME}. All rights reserved.</span><a href="#home">Back to top ↑</a></div>
+
+      <ProjectDrawer />
 
       <div className="modal" role="dialog" aria-modal="true"><div className="modal-bg" />
         <div className="modal-box"><button className="modal-x" aria-label="Close">×</button><div className="big" /><h3 /><p /></div>

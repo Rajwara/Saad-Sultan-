@@ -528,3 +528,39 @@ html{scrollbar-gutter:stable}
 /* testimonial logos: white circle behind the logo; wide/transparent logos get breathing room */
 .q-who .media:has(img){background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
 .q-who .media.logo-pad img{object-fit:contain;padding:18%}
+
+/* ================= PROJECT DRAWER — slides in from the right when a project card is clicked ================= */
+.pd{position:fixed;inset:0;z-index:180;pointer-events:none}
+.pd.open{pointer-events:auto}
+.pd-bg{position:absolute;inset:0;background:rgba(20,20,20,.45);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;transition:opacity .5s var(--ease)}
+.pd.open .pd-bg{opacity:1}
+.pd-panel{position:absolute;top:0;right:0;bottom:0;width:min(clamp(440px,36vw,820px),100vw);background:#e8e3d6;color:var(--ink);box-shadow:-30px 0 80px -30px rgba(0,0,0,.45);transform:translateX(104%);transition:transform .7s var(--ease);display:flex;flex-direction:column}
+.pd.open .pd-panel{transform:none}
+.pd-body{flex:1;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.pd-x{position:absolute;right:clamp(14px,1.2vw,28px);top:clamp(14px,1.2vw,28px);z-index:2;width:clamp(40px,2.9vw,64px);height:clamp(40px,2.9vw,64px);border-radius:50%;background:var(--ink);color:var(--y);font-size:clamp(22px,1.6vw,36px);line-height:1;transition:transform .5s var(--ease)}
+.pd-x:hover{transform:rotate(90deg)}
+.pd-cover{aspect-ratio:4/3;width:100%;background:linear-gradient(135deg,#3a3a3a,#262626)}
+.pd-cover img{object-position:top center}
+.pd-content{padding:clamp(24px,2.4vw,56px) clamp(22px,2.6vw,60px) clamp(28px,2.8vw,64px)}
+.pd-eyebrow{display:flex;align-items:center;gap:.6em;font-family:var(--fb);font-size:clamp(11px,.85vw,18px);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.pd-eyebrow i{width:.55em;height:.55em;border-radius:50%;background:var(--y);box-shadow:0 0 0 1px rgba(0,0,0,.25)}
+.pd-title{font-family:var(--fh);font-weight:600;font-size:clamp(38px,3.6vw,84px);line-height:1;letter-spacing:-.02em;margin:.35em 0 .3em}
+.pd-lead{font-size:clamp(17px,1.35vw,30px);line-height:1.45;color:var(--ink);font-weight:500;margin-bottom:1em}
+.pd-text{font-size:clamp(15px,1.05vw,22px);line-height:1.65;color:var(--muted);margin-bottom:.9em}
+.pd-label{display:block;font-family:var(--fb);font-size:clamp(11px,.8vw,17px);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:clamp(22px,2vw,44px) 0 clamp(10px,.8vw,18px)}
+.pd-list{list-style:none}
+.pd-list li{font-size:clamp(15px,1.05vw,22px);padding:.7em 0;border-bottom:1px solid rgba(0,0,0,.1)}
+.pd-list li:first-child{border-top:1px solid rgba(0,0,0,.1)}
+.pd-tags{display:flex;flex-wrap:wrap;gap:8px}
+.pd-tags span{font-size:clamp(13px,.95vw,20px);padding:.4em 1em;border-radius:999px;border:1px solid rgba(0,0,0,.18);background:rgba(255,255,255,.45)}
+.pd-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:clamp(28px,2.6vw,56px)}
+.pd-nav{display:flex;justify-content:space-between;gap:12px;margin-top:clamp(28px,2.6vw,56px);padding-top:clamp(16px,1.3vw,28px);border-top:1px solid rgba(0,0,0,.1)}
+.pd-nav button{font-family:var(--fh);font-size:clamp(13px,.95vw,20px);font-weight:500;color:var(--muted);transition:color .3s;text-align:left;max-width:48%}
+.pd-nav button:last-child{text-align:right}
+.pd-nav button:hover{color:var(--ink)}
+html.drawer-open{overflow:hidden}
+@media (max-width:767px){
+  .pd-panel{width:100vw}
+  .pd-cover{aspect-ratio:1/1}
+}
+@media (prefers-reduced-motion:reduce){.pd-panel,.pd-bg{transition:none}}
