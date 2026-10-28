@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { initMotion } from '@/lib/motion';
 import ProjectDrawer, { openProject } from '@/components/ProjectDrawer';
 import Contact from '@/components/Contact';
-import { WORD, FULL_NAME, EMAIL, CONTACT, SOCIALS, BLURB, STATS, JOURNEY, PROJECTS, CAPS, STATEMENT, QUOTES, CLIENT_LOGOS, FAQS } from '@/lib/content';
+import { WORD, FULL_NAME, EMAIL, CONTACT, SOCIALS, BLURB, STATS, JOURNEY, PROJECTS, CAPS, STATEMENT, QUOTES, CLIENT_LOGOS, FAQS, SERVICES } from '@/lib/content';
 
 const pad = n => String(n).padStart(2, '0');
 
@@ -58,6 +58,12 @@ const SOCIAL_ICONS = {
   linkedin: { label: 'LinkedIn', d: 'M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5M3 9h4v12H3zm7 0h3.8v1.7h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.3c0-1.3 0-2.9-1.8-2.9s-2 1.4-2 2.8V21h-4z' },
   facebook: { label: 'Facebook', d: 'M14 8.5V6.6c0-.8.2-1.3 1.4-1.3H17V2.2C16.7 2.1 15.7 2 14.6 2 12.2 2 10.6 3.4 10.6 6.1v2.4H8v3.4h2.6V22H14V11.9h2.7l.4-3.4z' },
   instagram: { label: 'Instagram', d: 'M7 1h10a6 6 0 0 1 6 6v10a6 6 0 0 1-6 6H7a6 6 0 0 1-6-6V7a6 6 0 0 1 6-6m0 2.2A3.8 3.8 0 0 0 3.2 7v10A3.8 3.8 0 0 0 7 20.8h10a3.8 3.8 0 0 0 3.8-3.8V7A3.8 3.8 0 0 0 17 3.2zM12 6.5a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11m0 2.2a3.3 3.3 0 1 0 0 6.6 3.3 3.3 0 0 0 0-6.6m5.8-3.6a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6' },
+};
+
+const SERVICE_ICONS = {
+  bag: 'M7 7V6a5 5 0 0 1 10 0v1h3l-1 15H5L4 7zm2 0h6V6a3 3 0 0 0-6 0zm-1 3v2h2v-2zm6 0v2h2v-2z',
+  code: 'M8.6 16.6 4 12l4.6-4.6L10 8.8 6.8 12l3.2 3.2zm6.8 0L14 15.2l3.2-3.2L14 8.8l1.4-1.4L20 12z',
+  bolt: 'M13 2 4 14h7l-1 8 9-12h-7z',
 };
 
 const Sep = () => <i className="sep hfade" />;
@@ -238,30 +244,19 @@ export default function Portfolio() {
         {/* SERVICES */}
         <section className="section" id="services">
           <span className="tag rv">Services</span>
-          <h2 className="h2 sl"><Line>Plans That</Line><Line>Fit Your Goals</Line></h2>
-          <p className="lead rv" style={{ marginTop: 20 }}>Same quality and attention to detail. The only difference is the size of the project and what you need right now.</p>
+          <h2 className="h2 sl"><Line>How I Can</Line><Line>Help You Grow</Line></h2>
+          <p className="lead rv" style={{ marginTop: 20 }}>From a new store to ongoing care for your website — tell me what you need and I&apos;ll put together a plan and a quote that fits.</p>
           <div className="glass plans">
-            <div className="plan feat">
-              <div className="ph"><i><svg viewBox="0 0 24 24"><path d="M4 4h7v7H4zm9 0h7v7h-7zM4 13h7v7H4zm9 0h7v7h-7z" /></svg></i>Monthly Retainer</div>
-              <div className="price">$<span data-price="2000">0</span> <small>/ month</small></div>
-              <p>A dedicated developer each month — whatever your site needs, handled.</p>
-              <ul><li>New pages, sections and features</li><li>Campaign updates and landing pages</li><li>Maintenance, fixes and content edits</li><li>Ongoing SEO and speed tuning</li></ul>
-              <div className="note">ⓘ For teams that need steady, long-term support.</div>
-            </div>
-            <div className="plan">
-              <div className="ph"><i><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z" /></svg></i>Launch Package</div>
-              <div className="price">$<span data-price="3500">0</span></div>
-              <p>A polished website ready to go live in about two weeks.</p>
-              <ul><li>Up to 6 pages</li><li>CMS setup</li><li>Scroll animations &amp; interactions</li><li>Technical SEO setup</li><li>Handover training after launch</li></ul>
-              <div className="note">ⓘ For new sites or redesigns that need a quick, clean start.</div>
-            </div>
-            <div className="plan">
-              <div className="ph"><i><svg viewBox="0 0 24 24"><path d="M3 21V10l4 3 5-9 5 9 4-3v11z" /></svg></i>Custom Build</div>
-              <div className="price">Book a Call</div>
-              <p>For bigger, more complex projects. Every scope is different, so we start with a conversation.</p>
-              <ul><li>Advanced animation systems</li><li>Multi-collection CMS architecture</li><li>Modular components &amp; dynamic content</li><li>API-driven features</li><li>Post-launch support included</li></ul>
-              <div className="note">ⓘ For projects that need a tailored approach.</div>
-            </div>
+            {SERVICES.map((sv, i) => (
+              <div className={`plan${i === 0 ? ' feat' : ''}`} key={sv.title}>
+                <div className="ph"><i><svg viewBox="0 0 24 24"><path d={SERVICE_ICONS[sv.icon]} /></svg></i>{sv.title}</div>
+                <div className="plat">{sv.platforms}</div>
+                <p>{sv.desc}</p>
+                <ul>{sv.items.map(it => <li key={it}>{it}</li>)}</ul>
+                <a href="#contact" className={`btn${i === 0 ? ' dark' : ''} plan-btn`} data-contact>Get a quote</a>
+                <div className="note">ⓘ {sv.note}</div>
+              </div>
+            ))}
           </div>
         </section>
 
